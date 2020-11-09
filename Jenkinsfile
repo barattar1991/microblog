@@ -1,11 +1,21 @@
 pipeline {
-    agent any
-    stages {
-        stage('build') {
-            steps {
-		sh 'sudo docker build --name microblog:test .'
-		sh 'sudo docker run --name microblog -d -p 8000:5000 --rm microblog:test'
-            }
-        }
+  environment {
+    dockerImage = ''
+  }
+  agent any
+  stages {
+    stage('Cloning Git') {
+      steps {
+        git 'https://github.com/barattar1991/microblog.git'
+      }
     }
+    stage('Building image') {
+      steps{
+        script {
+	  dockerImage = docker.build registry + ":$BUILD_NUMBER"
+          docker.build registry + ":$BUILD_NUMBER"
+        }
+      }
+    }
+  }
 }
