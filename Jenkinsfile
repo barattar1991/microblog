@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('build') {
             steps {
-            dockerImage = docker.build imagename
+            sh 'dockerImage = docker.build imagename'
             }
         }
     }
