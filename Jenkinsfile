@@ -14,6 +14,6 @@ pipeline {
         }
 			failure {
 				echo "The Pipeline failed :("
-                }
-            }
+			}
+	}
 }
