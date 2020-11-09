@@ -1,13 +1,11 @@
 pipeline { 
     agent { dockerfile true }
     stages {
-	stage('Initialize'){
-        def dockerHome = tool 'docker'
-        env.PATH = "${dockerHome}/bin:${env.PATH}"
-    }
         stage('Build') { 
             steps {
 	      script {
+	       def dockerHome = tool 'docker'
+       	       env.PATH = "${dockerHome}/bin:${env.PATH}"
 	       docker.build("microblog-image")
 	       docker.image("microblog-image").withRun('-p 8000:5000', '--name microblog-con -d')
                   }
