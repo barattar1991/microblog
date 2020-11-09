@@ -4,9 +4,7 @@ pipeline {
         stage('Build') { 
             steps {
 	      script {
-	       git 'https://github.com/barattar1991/microblog.git'
 	       def dockerHome = tool 'docker'
-       	       env.PATH = "${dockerHome}/bin:${env.PATH}"
 	       docker.build("microblog-image")
 	       docker.image("microblog-image").withRun('-p 8000:5000', '--name microblog-con -d')
                   }
