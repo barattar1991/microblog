@@ -1,10 +1,10 @@
 pipeline {
-    agent { Dockerfile true }
+    agent any
     stages {
-        stage('Test') {
+        stage('build') {
             steps {
-                sh 'node --version'
-                sh 'svn --version'
+				sh 'sudo docker build --name microblog:test .'
+				sh 'sudo docker run --name microblog -d -p 8000:5000 --rm microblog:test'
             }
         }
     }
