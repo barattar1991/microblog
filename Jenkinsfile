@@ -4,7 +4,6 @@ pipeline {
         stage('Build') { 
             steps {
 	      script {
-	       def dockerHome = tool 'docker'
 	       docker.build("microblog-image")
 	       docker.image("microblog-image").withRun('-p 8000:5000', '--name microblog-con -d')
                   }
